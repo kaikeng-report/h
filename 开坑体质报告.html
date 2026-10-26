@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>开坑体质报告 · 你适合写什么小说</title>
+<meta name="description" content="十道题，冲印出你天生适合开什么坑——网文写手创作体质测试。">
+<style>
+:root{
+  --paper:#F4EDE1;
+  --paper-deep:#E9E0CE;
+  --paper-warm:#EFE6D3;
+  --ink:#221E18;
+  --red:#B23A2E;
+  --mute:#8B8275;
+  --film:#2A2621;
+  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+  --sans:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  --mono:"Courier New",Courier,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--paper-deep);
+  color:var(--ink);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:26px 12px 48px;
+  line-height:1.7;
+}
+.grain{
+  position:fixed;inset:0;z-index:99;pointer-events:none;
+  opacity:.16;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.sheet{
+  width:100%;max-width:520px;
+  background:var(--paper);
+  border:1px solid var(--ink);
+  position:relative;
+}
+.sprocket{
+  height:22px;background:var(--film);position:relative;overflow:hidden;
+}
+.sprocket::before{
+  content:"";position:absolute;left:0;right:0;top:6px;height:10px;
+  background-image:repeating-linear-gradient(90deg,var(--paper) 0 13px,transparent 13px 31px);
+}
+.pad{padding:30px 24px 36px}
+.screen{display:none}
+.screen.active{display:block;animation:fadeUp .45s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes stampIn{
+  0%{opacity:0;transform:rotate(-18deg) scale(2.4)}
+  60%{opacity:1;transform:rotate(-8deg) scale(.94)}
+  100%{opacity:1;transform:rotate(-8deg) scale(1)}
+}
+.mono{font-family:var(--mono);letter-spacing:.08em}
+.mute{color:var(--mute)}
+.kicker{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink);
+  display:flex;align-items:center;gap:8px;margin-bottom:22px;
+}
+.kicker .dot{width:7px;height:7px;background:var(--red);display:inline-block;flex:none}
+.title{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(44px,13vw,58px);line-height:1.12;
+  letter-spacing:.06em;
+}
+.rule{
+  border-top:3px double var(--ink);
+  margin:18px 0 14px;
+}
+.subtitle{
+  font-family:var(--serif);font-size:17px;font-weight:700;
+  letter-spacing:.12em;margin-bottom:16px;
+}
+.lead{
+  font-size:14.5px;color:#3D372E;text-align:justify;
+  margin-bottom:22px;
+}
+.lead::first-letter{
+  font-family:var(--serif);font-size:2.3em;font-weight:900;
+  float:left;line-height:1;margin:4px 7px 0 0;color:var(--red);
+}
+.meta{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--ink);margin-bottom:26px;
+}
+.meta div{
+  padding:10px 6px;text-align:center;
+  border-right:1px solid var(--ink);
+}
+.meta div:last-child{border-right:none}
+.meta span{
+  display:block;font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;color:var(--mute);margin-bottom:2px;
+}
+.meta b{font-family:var(--serif);font-size:14px;letter-spacing:.05em}
+.btn{
+  display:block;width:100%;border:none;cursor:pointer;
+  font-family:var(--serif);font-size:17px;font-weight:700;
+  letter-spacing:.2em;padding:15px 10px;
+  transition:background .2s,color .2s,transform .1s;
+}
+.btn:active{transform:scale(.985)}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-solid:hover{background:var(--red)}
+.btn-line{
+  background:transparent;color:var(--ink);
+  border:1.5px solid var(--ink);margin-top:8px;
+}
+.btn-line:hover{background:var(--ink);color:var(--paper)}
+.footnote{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  color:var(--mute);text-align:center;margin-top:14px;
+}
+/* ---- quiz ---- */
+.qhead{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:11px;letter-spacing:.14em;margin-bottom:10px;
+}
+.film{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:26px}
+.film i{
+  height:16px;border:1px solid var(--ink);background:transparent;
+  transition:background .3s;
+}
+.film i.on{background:var(--ink)}
+.film i.now{background:var(--red);border-color:var(--red)}
+.qno{
+  font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+  color:var(--red);margin-bottom:8px;
+}
+.qtext{
+  font-family:var(--serif);font-size:21px;font-weight:800;
+  line-height:1.55;letter-spacing:.04em;margin-bottom:22px;
+}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{
+  display:flex;align-items:flex-start;gap:12px;
+  width:100%;text-align:left;cursor:pointer;
+  background:var(--paper);color:var(--ink);
+  border:1.5px solid var(--ink);
+  padding:14px 14px;font-size:14.5px;line-height:1.6;
+  font-family:var(--sans);
+  transition:background .18s,color .18s,box-shadow .18s;
+}
+.opt:hover{background:var(--paper-warm);box-shadow:3px 3px 0 var(--ink)}
+.opt .badge{
+  flex:none;width:24px;height:24px;background:var(--red);color:var(--paper);
+  font-family:var(--mono);font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;
+}
+.opt.picked{background:var(--ink);color:var(--paper);box-shadow:none}
+.opt.dim{opacity:.4;pointer-events:none}
+/* ---- result ---- */
+.stamp{
+  display:inline-block;font-family:var(--mono);font-size:13px;
+  letter-spacing:.3em;color:var(--red);
+  border:2.5px double var(--red);padding:7px 14px 7px 17px;
+  transform:rotate(-8deg);margin:6px 0 20px;
+  animation:stampIn .55s cubic-bezier(.2,.8,.3,1.1) .25s both;
+}
+.rname{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(38px,10.5vw,50px);line-height:1.2;
+  letter-spacing:.05em;margin-bottom:20px;
+}
+.tags{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.tag{
+  display:flex;align-items:center;gap:12px;
+  border:1px solid var(--ink);padding:10px 14px;
+  background:var(--paper-warm);
+}
+.tag span{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  color:var(--red);flex:none;
+}
+.tag b{font-family:var(--serif);font-size:15.5px;letter-spacing:.06em}
+.sec{
+  font-family:var(--serif);font-size:13px;font-weight:800;
+  letter-spacing:.34em;color:var(--mute);
+  display:flex;align-items:center;gap:10px;
+  margin:26px 0 12px;
+}
+.sec::after{content:"";flex:1;border-top:1px solid #C9BFAC}
+.traits{list-style:none;display:flex;flex-direction:column;gap:9px}
+.traits li{
+  display:flex;gap:11px;font-size:14.5px;line-height:1.65;
+}
+.traits li em{
+  font-family:var(--mono);font-style:normal;font-size:11px;
+  color:var(--red);letter-spacing:.06em;flex:none;margin-top:5px;
+}
+.advice{
+  font-size:14.5px;line-height:1.85;text-align:justify;
+  background:var(--paper-warm);
+  border-left:3px solid var(--red);
+  padding:13px 15px;
+}
+.report{
+  display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  color:var(--mute);border-top:1px solid var(--ink);
+  margin-top:28px;padding-top:12px;
+}
+.reveal{animation:fadeUp .5s ease both}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="sheet">
+  <div class="sprocket" aria-hidden="true"></div>
+  <div class="pad">
+
+    <section class="screen active" id="s-cover">
+      <p class="kicker"><span class="dot"></span>DARKROOM · 开坑检测所 &nbsp;/&nbsp; FILING NO.01</p>
+      <h1 class="title">开坑<br>体质报告</h1>
+      <div class="rule"></div>
+      <p class="subtitle">十道题，冲印你天生适合开的坑</p>
+      <p class="lead">每个人手里都攥着一个没开的坑。我们用十道题，把你的创作体质冲印成底片——你适合写什么，其实早就写在你卡文的方式里。</p>
+      <div class="meta">
+        <div><span>题量</span><b>10 题</b></div>
+        <div><span>时长</span><b>约 1 分钟</b></div>
+        <div><span>面向</span><b>网文写手</b></div>
+      </div>
+      <button class="btn btn-solid" id="btnStart">开始冲印 →</button>
+      <p class="footnote">仅供娱乐 · 咕咕行为与本报告无关</p>
+    </section>
+
+    <section class="screen" id="s-quiz">
+      <div class="qhead">
+        <span class="mono" id="fqCount">FILM 01/10</span>
+        <span class="mono mute">冲印进度</span>
+      </div>
+      <div class="film" id="film" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <p class="qno" id="fqNo">QUESTION 01</p>
+      <h2 class="qtext" id="fqText"></h2>
+      <div class="opts" id="opts"></div>
+    </section>
+
+    <section class="screen" id="s-result">
+      <p class="kicker"><span class="dot"></span>DEVELOPED — 冲印完成</p>
+      <div class="stamp">暗房认证</div>
+      <h1 class="rname" id="rName"></h1>
+      <div class="tags">
+        <div class="tag"><span>体质倾向</span><b id="rTend"></b></div>
+        <div class="tag"><span>推荐题材</span><b id="rGenre"></b></div>
+      </div>
+      <p class="lead" id="rHook"></p>
+      <h3 class="sec">检测特征</h3>
+      <ul class="traits" id="rTraits"></ul>
+      <h3 class="sec">开坑建议</h3>
+      <p class="advice" id="rAdvice"></p>
+      <div class="report">
+        <span id="rNo">NO.0000</span>
+        <span id="rDate"></span>
+      </div>
+      <button class="btn btn-line" id="btnRetry">再冲印一次</button>
+      <p class="footnote">仅供娱乐 · 结果不构成断更的任何理由</p>
+    </section>
+
+  </div>
+  <div class="sprocket" aria-hidden="true"></div>
+</div>
+<script>
+(function(){
+"use strict";
+var QUESTIONS=[
+{q:"开坑仪式：动笔之前，你必须先做——",o:[
+  {t:"写三页世界观：力量体系、势力地图、规则手册",s:1},
+  {t:"给主角画像：性格、口头禅，还有他命中注定的宿敌",s:-1},
+  {t:"列爽点清单：打脸、逆袭、当众封神的名场面",p:1}]},
+{q:"卡文了，你会先——",o:[
+  {t:"重翻设定集，把逻辑漏洞抠平再写",c:1,p:-1},
+  {t:"先把打脸那场写爽，逻辑明天再说",p:1},
+  {t:"找纸片人「聊聊」，让感情推着剧情走",s:-1}]},
+{q:"以下哪种文名，最让你心动？",o:[
+  {t:"《诡雾序列：第九纪元规则手册》",s:1},
+  {t:"《重生后死对头他黑化锁我》",s:-1},
+  {t:"《十日之后，无人生还》",c:1}]},
+{q:"你最怕看到读者评哪一句？",o:[
+  {t:"「设定太复杂，看设定看不动了」",s:1},
+  {t:"「节奏太慢，主角怎么还这么憋屈」",p:1},
+  {t:"「文笔没画面感，读着没味道」",c:-1}]},
+{q:"你的存稿姿势是——",o:[
+  {t:"攒齐大纲和伏笔表，再动第一行字",c:1,p:-1},
+  {t:"日更三千，边写边修，手感比完美重要",p:1},
+  {t:"主角小传、日常番外攒一堆，全是碎片",s:-1}]},
+{q:"哪种名场面，最让你上头？",o:[
+  {t:"规则揭晓、身份反转，合上书细思恐极",c:1},
+  {t:"当众打脸、一路封神的高燃时刻",p:1},
+  {t:"暧昧拉扯到心意相通的那一秒",s:-1}]},
+{q:"挑一本新书，你先翻什么？",o:[
+  {t:"金手指和世界观，脑洞够不够新",s:1},
+  {t:"CP张力和人设，带不带感",s:-1},
+  {t:"章末钩子狠不狠、伏笔埋得深不深",c:1}]},
+{q:"深夜赶稿，哪种状态属于你？",o:[
+  {t:"为一个设定细节兴奋到天亮",s:1,p:-1},
+  {t:"码字如飞，只想今晚爆更",p:1},
+  {t:"对着一段氛围描写反复打磨到满意",c:-1,p:-1}]},
+{q:"你心目中的完美结局是——",o:[
+  {t:"世界观收束，所有伏笔全部归位",c:1},
+  {t:"主角登顶，全书情绪最高潮收尾",p:1},
+  {t:"角色各自圆满，合上书还有余韵",s:-1}]},
+{q:"咕咕一个月后回归，首发放什么？",o:[
+  {t:"幕后杂谈：这本的设定集和考据干货",s:1},
+  {t:"三章连发，加更补偿读者",p:1},
+  {t:"一张氛围图，配三百字引子",c:-1,p:-1}]}
+];
+var RESULTS={
+"111":{name:"爽感工程师",tend:"设定党 · 快肝 · 算计",genre:"系统流 · 都市高武",
+  hook:"你开坑像建工厂流水线：金手指、升级线、爽点排布全部提前算好，读者的爽感由你精准供货。你的坑不会有意外——除非你自己想加。",
+  traits:["爽点雷达：第几章打脸，心里有表","升级节奏控：十章一小爽，五十章一大爽","首章就敢给高光，留人能力一流"],
+  advice:"爽点通胀是你的职业病——给主角留一次真正的、赢不了的危机，读者会记你一辈子。"},
+"110":{name:"脑洞烟花怪",tend:"设定党 · 快肝 · 氛围",genre:"玄幻爽文 · 轻科幻",
+  hook:"设定是你的烟花，想炸就炸。逻辑？那是读者该做的事。你开坑的快乐在于「原来还能这样」，至于坑底……再说再说。",
+  traits:["金手指批发商：一个不够就再来一个","名场面制造机：先爽再圆，效率惊人","设定永远比大纲跑得快"],
+  advice:"脑洞太多容易开五个坑咕四个——挑最炸的那一个，先写满三十万字再看别的烟花。"},
+"101":{name:"规则建筑师",tend:"设定党 · 慢炖 · 算计",genre:"无限流 · 规则怪谈",
+  hook:"你享受的是把规则、伏笔、世界观织成一张网，然后站在岸上看读者自己掉进来。你的文，适合读两遍。",
+  traits:["伏笔收纳癖：第三十章的细节第一章就埋好","逻辑洁癖：设定自洽是你的底线","结局党最爱：收官章能反手再炸一次"],
+  advice:"网织得太密会劝退轻读者——每隔几章留一个「无脑爽」的出口，让更多人进得来。"},
+"100":{name:"东方造境师",tend:"设定党 · 慢炖 · 氛围",genre:"仙侠 · 古风奇幻",
+  hook:"你写的是山河、剑气和月下的一壶酒。世界观是你的山水长卷，设定存在的意义，是让意境立得住。",
+  traits:["场景画面感：读者能看见你的文字","文青浓度超标：引子常比正文还讲究","开坑先画地图：地理比人物先活过来"],
+  advice:"氛围一流，但记得给主角一个「不得不动」的理由——别让风景抢了主线的戏。"},
+"011":{name:"剧情纵火犯",tend:"人物党 · 快肝 · 算计",genre:"现言强冲突 · 复仇爽剧",
+  hook:"人物关系是你的燃料。你擅长让每一章都有人被点着——误会、对峙、反杀，火苗永远在页尾撩一下。",
+  traits:["冲突永动机：没有矛盾就制造矛盾","台词有钩：一句话能记半本书","拉扯感满分：进两步退一步的节奏大师"],
+  advice:"火别烧太快——在两把火之间塞一口糖，读者喘得上气，虐才有回报。"},
+"010":{name:"甜宠永动机",tend:"人物党 · 快肝 · 氛围",genre:"甜宠 · 校园现言",
+  hook:"你是磕学家转世，写文就是为了把糖亲手塞进读者嘴里。你的坑里没有玻璃，只有撒不完的糖纸。",
+  traits:["CP感知力：谁跟谁有戏，一眼定生死","互动细节库：拉袖角、收手机全是招","甜度把控稳：读者喊齁之前刚好收手"],
+  advice:"纯糖容易腻——加一条小误会当跳板，糖才有「再磕一口」的瘾。"},
+"001":{name:"暗房解剖师",tend:"人物党 · 慢炖 · 算计",genre:"悬疑群像 · 人性暗黑",
+  hook:"你喜欢把人放进暗房里慢慢显影：动机、秘密、难言之隐，一层一层浮出纸面。你写的不是案，是人。",
+  traits:["人心显微镜：一个眼神能写三段","群像不崩：出场十人也各有影子","细思恐极型伏笔：合上书才反应过来"],
+  advice:"阴郁浓度记得配平——给角色留一道微光，读者才撑得到结局。"},
+"000":{name:"慢炖生活家",tend:"人物党 · 慢炖 · 氛围",genre:"种田 · 日常治愈",
+  hook:"你不追爆点，追的是读者像回家一样天天点开。一餐一饭、一院一灯，你的坑是评论区的常驻避风港。",
+  traits:["细节烟火气：碗筷声都能写出温度","稳定更新体质：日更像呼吸一样自然","治愈浓度高：读者从你的文里下不了班"],
+  advice:"日常流也要有火苗——隔几章放个小波澜，读者才知道锅里一直炖着事。"}
+};
+var LETTERS=["A","B","C"];
+var idx=0, scores={s:0,p:0,c:0}, busy=false;
+var $=function(id){return document.getElementById(id)};
+function show(id){
+  var list=document.querySelectorAll(".screen");
+  for(var i=0;i<list.length;i++) list[i].classList.remove("active");
+  $(id).classList.add("active");
+  window.scrollTo(0,0);
+}
+function updateFilm(){
+  var cells=$("film").children;
+  for(var i=0;i<cells.length;i++){
+    cells[i].className = i<idx ? "on" : (i===idx ? "now" : "");
+  }
+  var n=idx+1;
+  $("fqCount").textContent="FILM "+(n<10?"0":"")+n+"/10";
+  $("fqNo").textContent="QUESTION "+(n<10?"0":"")+n;
+}
+function renderQuestion(){
+  var item=QUESTIONS[idx];
+  $("fqText").textContent=item.q;
+  var box=$("opts");
+  box.innerHTML="";
+  updateFilm();
+  for(var i=0;i<item.o.length;i++){
+    (function(opt,letter){
+      var b=document.createElement("button");
+      b.type="button";
+      b.className="opt";
+      b.innerHTML='<span class="badge">'+letter+'</span><span>'+opt.t+'</span>';
+      b.addEventListener("click",function(){pick(b,opt)});
+      box.appendChild(b);
+    })(item.o[i],LETTERS[i]);
+  }
+}
+function pick(btn,opt){
+  if(busy) return;
+  busy=true;
+  btn.classList.add("picked");
+  var all=$("opts").children;
+  for(var i=0;i<all.length;i++){
+    if(all[i]!==btn) all[i].classList.add("dim");
+  }
+  scores.s+=opt.s||0;
+  scores.p+=opt.p||0;
+  scores.c+=opt.c||0;
+  setTimeout(function(){
+    idx++;
+    if(idx<QUESTIONS.length){
+      renderQuestion();
+      busy=false;
+    }else{
+      showResult();
+      busy=false;
+    }
+  },320);
+}
+function showResult(){
+  var key=(scores.s>0?1:0)+""+(scores.p>0?1:0)+""+(scores.c>0?1:0);
+  var r=RESULTS[key];
+  $("rName").textContent=r.name;
+  $("rTend").textContent=r.tend;
+  $("rGenre").textContent=r.genre;
+  $("rHook").textContent=r.hook;
+  var ul=$("rTraits");
+  ul.innerHTML="";
+  for(var i=0;i<r.traits.length;i++){
+    var li=document.createElement("li");
+    li.innerHTML='<em>0'+(i+1)+'</em><span>'+r.traits[i]+'</span>';
+    ul.appendChild(li);
+  }
+  $("rAdvice").textContent=r.advice;
+  $("rNo").textContent="NO."+String(Math.floor(Math.random()*9000)+1000);
+  var d=new Date();
+  $("rDate").textContent=d.getFullYear()+"."+String(d.getMonth()+1).padStart(2,"0")+"."+String(d.getDate()).padStart(2,"0");
+  show("s-result");
+}
+function reset(){
+  idx=0;busy=false;scores={s:0,p:0,c:0};
+  show("s-quiz");
+  renderQuestion();
+}
+$("btnStart").addEventListener("click",reset);
+$("btnRetry").addEventListener("click",reset);
+})();
+</script>
+</body>
+</html>
