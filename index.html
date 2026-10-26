@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>开坑体质报告 · 你适合写什么小说</title>
 <meta name="description" content="十道题，冲印出你天生适合开什么坑——网文写手创作体质测试。">
+<meta name="robots" content="noindex, nofollow">
 <style>
 :root{
   --paper:#F4EDE1;
@@ -209,6 +210,11 @@ body{
   color:var(--mute);border-top:1px solid var(--ink);
   margin-top:28px;padding-top:12px;
 }
+.lic{
+  display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+  color:var(--red);border:1px dashed var(--red);
+  padding:8px 12px;text-align:center;margin:-6px 0 16px;
+}
 .reveal{animation:fadeUp .5s ease both}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -225,7 +231,7 @@ body{
       <p class="kicker"><span class="dot"></span>DARKROOM · 开坑检测所 &nbsp;/&nbsp; FILING NO.01</p>
       <h1 class="title">开坑<br>体质报告</h1>
       <div class="rule"></div>
-      <p class="subtitle">十道题，冲印你天生适合开的坑</p>
+      <p class="subtitle" id="subTitle">十道题，冲印你天生适合开的坑</p>
       <p class="lead">每个人手里都攥着一个没开的坑。我们用十道题，把你的创作体质冲印成底片——你适合写什么，其实早就写在你卡文的方式里。</p>
       <div class="meta">
         <div><span>题量</span><b>10 题</b></div>
@@ -252,6 +258,7 @@ body{
     <section class="screen" id="s-result">
       <p class="kicker"><span class="dot"></span>DEVELOPED — 冲印完成</p>
       <div class="stamp">暗房认证</div>
+      <p class="lic" id="rLic">正版水印 · 出品：小红书 @回响 · 仅限下单本人使用</p>
       <h1 class="rname" id="rName"></h1>
       <div class="tags">
         <div class="tag"><span>体质倾向</span><b id="rTend"></b></div>
@@ -265,6 +272,7 @@ body{
       <div class="report">
         <span id="rNo">NO.0000</span>
         <span id="rDate"></span>
+        <span id="rLeak">仅限下单本人使用 · 泄露即吊销 · 禁止转卖</span>
       </div>
       <button class="btn btn-line" id="btnRetry">再冲印一次</button>
       <p class="footnote">仅供娱乐 · 结果不构成断更的任何理由</p>
